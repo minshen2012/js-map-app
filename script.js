@@ -190,7 +190,6 @@ class App {
 
     //add new object to workout array
     this.#workouts.push(workout);
-    console.log(workout);
 
     //render workout on map as marker
     this._renderWorkoutMarker(workout);
@@ -276,15 +275,13 @@ class App {
 
   _moveToPopup(e) {
     const workoutEl = e.target.closest('.workout');
-    console.log(workoutEl);
+    // console.log(workoutEl);
 
     if (!workoutEl) return;
 
     const workout = this.#workouts.find(
       (work) => work.id === workoutEl.dataset.id
     );
-
-    console.log(workout);
 
     this.#map.setView(workout.coords, this.#mapZoomLevel, {
       animate: true,
@@ -303,7 +300,7 @@ class App {
 
   _getLocalStorage() {
     const data = JSON.parse(localStorage.getItem('workouts'));
-    console.log(data);
+    // console.log(data);
 
     if (!data) return;
 
@@ -312,6 +309,11 @@ class App {
     this.#workouts.forEach((work) => {
       this._renderWorkout(work);
     });
+  }
+
+  reset() {
+    localStorage.removeItem('workouts');
+    location.reload();
   }
 }
 
